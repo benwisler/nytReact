@@ -24,7 +24,8 @@ class Form extends React.Component {
     API.saveArticle({
       title: article.headline.main,
       date: article.pub_date,
-      url: article.web_url
+      url: article.web_url,
+      saved: true
 
     })
       .catch(err => console.log(article.headline.main))

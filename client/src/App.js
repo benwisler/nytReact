@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Header from './components/Header'
 import Form from './components/Form'
+import Saved from './components/Saved'
 
 
 const App = () => (
@@ -12,7 +13,7 @@ const App = () => (
     <div>
       <Switch>
         <Route exact path="/" component={Form} />
-        {/* <Route path="/articles" component={Form} /> */}
+        <Route path="/saved" component={Saved} />
         <Route exact path="/articles/:id" component={Form} />
       </Switch>
     </div>

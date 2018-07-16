@@ -9,11 +9,10 @@ export default {
     + "?api-key=f4b1a253a56d406b91b41dabf145293a" + "&q=" + keyword + "&begin_date=" + startDate + "0101&end_date=" + endDate + "0101"
   )
   },
-  
   // Gets the book with the given id
-//   getBook: function(id) {
-//     return axios.get("/api/books/" + id);
-//   },
+  get: function(id) {
+    return axios.get("/api/books/" + id);
+  },
   // Deletes the book with the given id
   delete: function(id) {
     return axios.delete("/api/articles/" + id);
