@@ -5,7 +5,8 @@ var articleSchema = new Schema({
     title: {
         type: String,
         trim: true,
-        required: true
+        required: true,
+        unique: true
     },
     date: {
         type: Date,
@@ -21,7 +22,6 @@ var articleSchema = new Schema({
         default: false
     }
 })
-
 var Article = mongoose.model("Article", articleSchema);
 
 module.exports = Article;

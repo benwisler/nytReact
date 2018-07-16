@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import './App.css';
 import Header from './components/Header'
-import Form from './components/Form'
+import Form from './components/Form/Form'
 import Saved from './components/Saved'
 
 

@@ -4,7 +4,7 @@ import { FormGroup, ControlLabel, Button, FormControl } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { ArticleListItem, ArticleList } from "./ArticleList";
 import DeleteButton from "./DeleteButton";
-import Form from "./Form";
+import Form from "./Form/Form";
 import Header from "./Header"
 
 
@@ -37,14 +37,17 @@ class Saved extends React.Component {
         return (
             <div>
             <Header/>
+            <div id="savedDiv">
             <h1>Saved Articles</h1>
+            </div>
+            <br/>
             <ArticleList>
             {this.state.articles.map(article => {
               return (
                 <ArticleListItem key={article._id}>
                 <strong>
                   <h1>{article.title}</h1>
-                  <h2> {article.url}</h2>
+                  <a href={article.url}>{article.url}</a>
                   <h3>{article.date}</h3>
                 </strong>
                 <DeleteButton onClick={() => this.delete(article._id)} />

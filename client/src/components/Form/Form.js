@@ -1,10 +1,11 @@
 import React from "react";
-import API from "./../utils/API";
+import API from "./../../utils/API";
 import { FormGroup, ControlLabel, Button, FormControl } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
-import { ArticleListItem, ArticleList } from "./ArticleList";
-import SaveButton from "./SaveButton";
-import Header from "./Header";
+import { ArticleListItem, ArticleList } from "./../ArticleList";
+import SaveButton from "./../SaveButton";
+import Header from "./../Header";
+import './style.css'
 class Form extends React.Component {
   state = {
     articles: [],
@@ -20,12 +21,14 @@ class Form extends React.Component {
   };
 
   saveArticle = article => {
+
     API.saveArticle({
       title: article.headline.main,
       date: article.pub_date,
       url: article.web_url,
       saved: true
     }).catch(err => console.log(article.headline.main));
+  
   };
   handleFormSubmit = event => {
     event.preventDefault();
@@ -44,7 +47,7 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-   changeText = () => // no ';' here
+   changeText = () =>
   {
       if (this.value=="Save") this.value = "Saved";
       else this.value = "Saved";
@@ -52,15 +55,16 @@ class Form extends React.Component {
   
   render() {
     return (
-      <div>
+      <div id="bodyID">
         <Header/>
         <form>
           <FormGroup
             controlId="formBasicText"
             name="searchForm"
+            id="searchForm"
             // validationState={this.getValidationState()}
           >
-            <ControlLabel>Search Term</ControlLabel>
+            <ControlLabel id="searchParam">Search Term</ControlLabel>
             <FormControl
               type="text"
               name="keyword"
@@ -68,7 +72,7 @@ class Form extends React.Component {
               // placeholder="Enter text"
               onChange={this.handleChange}
             />
-            <ControlLabel>Number of Records for Retrieve</ControlLabel>
+            <ControlLabel id="searchParam">Number of Records for Retrieve</ControlLabel>
             <FormControl
               componentClass="select"
               name="numSearch"
@@ -81,7 +85,7 @@ class Form extends React.Component {
               <option value={10}>10</option>
             </FormControl>
 
-            <ControlLabel>Start Year (optional)</ControlLabel>
+            <ControlLabel id="searchParam">Start Year</ControlLabel>
             <FormControl
               type="text"
               name="startYear"
@@ -89,18 +93,18 @@ class Form extends React.Component {
               // placeholder="Enter text"
               onChange={this.handleChange}
             />
-            <ControlLabel>End Year Optional</ControlLabel>
+            <ControlLabel id="searchParam">End Year</ControlLabel>
             <FormControl
               type="text"
               name="endYear"
-              value={this.state.endYear}
+              value={(this.state.endYear)}
               // placeholder="Enter text"
               onChange={this.handleChange}
             />
 
             <Button
               onClick={this.handleFormSubmit}
-              disabled={!this.state.keyword}
+              disabled={!this.state.keyword || !this.state.startYear || !this.state.endYear}
             >
               Search
             </Button>
@@ -112,18 +116,18 @@ class Form extends React.Component {
             <ArticleList>
               {this.state.articles.map(article => {
                 return (
-                  <ArticleListItem key={article._id}>
+                  <ArticleListItem id="center" key={article._id}>
                     <strong>
                       <h1>{article.headline.main}</h1>
-                      <h2> {article.web_url}</h2>
+                      <a href={article.web_url}>{article.web_url}</a>
                       <h3>{article.pub_date}</h3>
                     </strong>
                     <SaveButton onClick={() => 
-                      {
-                      this.changeText();
-                      this.saveArticle(article)}} />
+                      
+                      this.saveArticle(article)} />
                     
                   </ArticleListItem>
+                  
                 );
               })}
             </ArticleList>
