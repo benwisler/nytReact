@@ -11,11 +11,11 @@ export default {
   },
   // Gets the book with the given id
   findAll: function() {
-    return axios.get("/api/articles");
+    return axios.get("/api/articles/saved");
   },
   // Deletes the book with the given id
   delete: function(id) {
-    return axios.delete("/api/articles/" + id);
+    return axios.delete("/api/articles/saved/" + id);
   },
   // Saves a book to the database
   saveArticle: function(articleData) {

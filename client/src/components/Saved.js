@@ -13,9 +13,7 @@ class Saved extends React.Component {
         articles: []
       };
       componentDidMount() {
-          console.log("H!!!!")
           this.getSaved();
-
         
     };
     getSaved = () => {
