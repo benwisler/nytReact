@@ -53,10 +53,12 @@ class Form extends React.Component {
       saved: true
     }).catch(err => console.log(article.headline.main));
     article.savedText = "Saved";
+    this.state.previousArticles.push(article.url)
     this.forceUpdate();
-  
   };
   handleFormSubmit = () => {
+    this.componentDidMount()
+    // console.log("GTGTG"+this.state.previousArticles)
     API.getArticles(
       this.state.keyword,
       this.state.startYear,
@@ -69,14 +71,28 @@ class Form extends React.Component {
           if (this.state.previousArticles[i].indexOf(doc.web_url) === -1) {
             console.log("worked")          
 
-            return doc.savedText = "Save"
+            doc.savedText = "Save";
+            
           }
           else {
-            return doc.savedText = "Saved"
-          }
+            
+            doc.savedText = "Saved";
         }
-        })
-        this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) });
+        }})
+        // console.log(res.data.response.docs);
+        // res.data.response.docs.map((doc) => {
+        //   for(var i = 0; i < this.state.previousArticles.length; i++) {
+        //   if (this.state.previousArticles[i].indexOf(doc.web_url) === -1) {
+        //     console.log("worked")          
+
+        //     return doc.savedText = "Save"
+        //   }
+        //   else {
+            
+        //     return doc.savedText = "Saved";
+        // }
+        // }})
+        this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) })
       })
       .catch(err => this.setState({ error: err.message }));
   };
@@ -84,7 +100,7 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-
+  
   render() {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute:"2-digit", second: "2-digit" };
 
