@@ -1,5 +1,6 @@
 import React from "react";
 import { Jumbotron, Button } from "react-bootstrap";
+import { Link } from 'react-router';
 
 class Header extends React.Component {
   render() {
@@ -11,8 +12,8 @@ class Header extends React.Component {
                 Search for articles by keyword and save them for future reference.
           </p>
           <p>
-            <Button bsStyle="primary" href="/saved" >View Saved</Button>
-            <Button bsStyle="primary" href="/" >Go Home</Button>
+            <Button bsStyle="primary"><Link to="/saved" >View Saved</Link></Button>
+            <Button bsStyle="primary"><Link to="/">Go Home</Link></Button>
 
           </p>
         </Jumbotron>;
