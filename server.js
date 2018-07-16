@@ -19,9 +19,9 @@ app.get("*", (req, res) => {
 });
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI );
 // Start the API server
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
