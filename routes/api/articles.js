@@ -13,7 +13,7 @@ const router = require("express").Router();
 const articlesController = require("./../../controllers/articlesController");
 
 // Matches withhttp://localhost:3000 "/api/books"
-router.route("http://localhost:3001/api/articles")
+router.route("/")
   // .get(articlesController.findAll)
   .post(articlesController.saveArticle)
 
