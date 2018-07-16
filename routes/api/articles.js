@@ -13,10 +13,9 @@ const router = require("express").Router();
 const articlesController = require("./../../controllers/articlesController");
 
 // Matches withhttp://localhost:3000 "/api/books"
-router
-  .route("/")
-  // .get(articlesController.findAll)
+router.route("/")
   .post(articlesController.saveArticle);
+  
 router.route("/saved").get(articlesController.findAll);
 // .post(articlesController.saveArticle)
 
