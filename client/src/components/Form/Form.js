@@ -8,20 +8,44 @@ import Header from "./../Header";
 import './style.css'
 class Form extends React.Component {
   state = {
+    // previousArticles: [],
     articles: [],
     keyword: "",
     numSearch: 1,
     startYear: "1850", //fix this
     endYear: "2018",
-    error: ""
+    error: "",
+    previousArticles: []
   };
 
-  logChange = val => {
-    console.log("Selected: " + val);
-  };
 
+	componentDidMount() {
+    this.getSavedNoSubmit();
+		
+	};
+	getSaved = () => {
+    // event.preventDefault();
+		API.findAll()
+		.then(res => {
+      console.log(res.data)
+      this.state.previousArticles.push(res.data.map(article => article.url))
+      })
+      this.handleFormSubmit()
+      // console.log(previousArticles+"!!")
+    
+  };
+  getSavedNoSubmit = () => {
+    // event.preventDefault();
+		API.findAll()
+		.then(res => {
+      console.log(res.data)
+      this.state.previousArticles.push(res.data.map(article => article.url))
+      })
+      // this.handleFormSubmit()
+      // console.log(previousArticles+"!!")
+    
+	};
   saveArticle = article => {
-
     API.saveArticle({
       title: article.headline.main,
       date: article.pub_date,
@@ -32,8 +56,7 @@ class Form extends React.Component {
     this.forceUpdate();
   
   };
-  handleFormSubmit = event => {
-    event.preventDefault();
+  handleFormSubmit = () => {
     API.getArticles(
       this.state.keyword,
       this.state.startYear,
@@ -42,7 +65,16 @@ class Form extends React.Component {
       .then(res => {
         console.log(res.data.response.docs);
         res.data.response.docs.map((doc) => {
-          return doc.savedText = "Save"
+          for(var i = 0; i < this.state.previousArticles.length; i++) {
+          if (this.state.previousArticles[i].indexOf(doc.web_url) === -1) {
+            console.log("worked")          
+
+            return doc.savedText = "Save"
+          }
+          else {
+            return doc.savedText = "Saved"
+          }
+        }
         })
         this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) });
       })
@@ -52,12 +84,7 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-   changeText = () =>
-  {
-      if (this.value=="Save") this.value = "Saved";
-      else this.value = "Saved";
-  }
-  
+
   render() {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute:"2-digit", second: "2-digit" };
 
@@ -110,7 +137,7 @@ class Form extends React.Component {
             />
 
             <Button
-              onClick={this.handleFormSubmit}
+              onClick={this.getSaved}
               disabled={!this.state.keyword || !this.state.startYear || !this.state.endYear}
             >
               Search

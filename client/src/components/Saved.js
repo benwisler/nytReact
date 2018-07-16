@@ -1,10 +1,7 @@
 import React from "react";
 import API from "./../utils/API";
-import { FormGroup, ControlLabel, Button, FormControl } from "react-bootstrap";
-import { Col, Row } from "react-bootstrap";
 import { ArticleListItem, ArticleList } from "./ArticleList";
 import DeleteButton from "./DeleteButton";
-import Form from "./Form/Form";
 import Header from "./Header"
 
 
