@@ -17,12 +17,12 @@ router
   .route("/")
   // .get(articlesController.findAll)
   .post(articlesController.saveArticle);
-router.route("/saved").get(articlesController.findAll);
+router.route("/").get(articlesController.findAll);
 // .post(articlesController.saveArticle)
 
 // Matches with "/api/books/:id"
 router
-  .route("/saved/:id")
+  .route("/:id")
   // .get(articlesController.findById)
   // .post(articlesController.save)
   .delete(articlesController.delete);
