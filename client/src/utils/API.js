@@ -10,8 +10,8 @@ export default {
   )
   },
   // Gets the book with the given id
-  get: function(id) {
-    return axios.get("/api/books/" + id);
+  findAll: function() {
+    return axios.get("/api/articles");
   },
   // Deletes the book with the given id
   delete: function(id) {

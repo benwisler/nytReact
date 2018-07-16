@@ -12,8 +12,7 @@ class Form extends React.Component {
     numSearch: 1,
     startYear: "1850", //fix this
     endYear: "2018",
-    error: "",
-    
+    error: ""
   };
 
   logChange = val => {
@@ -26,10 +25,8 @@ class Form extends React.Component {
       date: article.pub_date,
       url: article.web_url,
       saved: true
-
-    })
-      .catch(err => console.log(article.headline.main))
-  }
+    }).catch(err => console.log(article.headline.main));
+  };
   handleFormSubmit = event => {
     event.preventDefault();
     API.getArticles(
@@ -47,7 +44,6 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-
 
   render() {
     return (
@@ -84,7 +80,7 @@ class Form extends React.Component {
               type="text"
               name="startYear"
               value={this.state.startYear} //add month and day option
-                          // placeholder="Enter text"
+              // placeholder="Enter text"
               onChange={this.handleChange}
             />
             <ControlLabel>End Year Optional</ControlLabel>
@@ -108,26 +104,23 @@ class Form extends React.Component {
         <Row>
           <Col>
             <ArticleList>
-              
               {this.state.articles.map(article => {
-                  return (
+                return (
                   <ArticleListItem key={article._id}>
                     <strong>
                       <h1>{article.headline.main}</h1>
-                     <h2> {article.web_url}</h2>
+                      <h2> {article.web_url}</h2>
                       <h3>{article.pub_date}</h3>
-
                     </strong>
-                    <SaveButton onClick={() => (this.saveArticle(article))}/>
+                    <SaveButton onClick={() => this.saveArticle(article)} />
                   </ArticleListItem>
-                  )
+                );
               })}
             </ArticleList>
           </Col>
         </Row>
       </div>
-
-            )
-          };
+    );
+  }
 }
 export default Form;
