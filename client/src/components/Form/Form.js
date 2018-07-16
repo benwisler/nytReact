@@ -28,6 +28,8 @@ class Form extends React.Component {
       url: article.web_url,
       saved: true
     }).catch(err => console.log(article.headline.main));
+    article.savedText = "Saved";
+    this.forceUpdate();
   
   };
   handleFormSubmit = event => {
@@ -39,6 +41,9 @@ class Form extends React.Component {
     )
       .then(res => {
         console.log(res.data.response.docs);
+        res.data.response.docs.map((doc) => {
+          return doc.savedText = "Save"
+        })
         this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) });
       })
       .catch(err => this.setState({ error: err.message }));
@@ -54,6 +59,8 @@ class Form extends React.Component {
   }
   
   render() {
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute:"2-digit", second: "2-digit" };
+
     return (
       <div id="bodyID">
         <Header/>
@@ -120,11 +127,16 @@ class Form extends React.Component {
                     <strong>
                       <h1>{article.headline.main}</h1>
                       <a href={article.web_url}>{article.web_url}</a>
-                      <h3>{article.pub_date}</h3>
+                      <h3>{new Date(article.pub_date).toLocaleDateString('en-US', options)}</h3>
                     </strong>
-                    <SaveButton onClick={() => 
-                      
-                      this.saveArticle(article)} />
+                    
+                    <SaveButton 
+                    text = {article.savedText}
+                    onClick={() => 
+                      {
+                      this.saveArticle(article)
+                    } 
+                  }/>
                     
                   </ArticleListItem>
                   

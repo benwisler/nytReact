@@ -1,15 +1,14 @@
 import React from 'react';
 import { Button } from "react-bootstrap"
-var changeText = () =>
-{
-    if (this.a.text =="Save") this.a.text = "Saved";
-    else this.value = "Saved";
-}
-const SaveButton = props => (
-  
-    <Button className="save-btn" {...props} >
-      Save
+
+class SaveButton extends React.Component {
+  render() {
+    return (
+    <Button className="save-btn" {...this.props} disabled={this.props.text==="Saved"} >
+      {this.props.text}
     </Button>
   );
+  }
+  };
   
 export default SaveButton;

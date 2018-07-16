@@ -33,7 +33,7 @@ class Saved extends React.Component {
     }
 
     render () {
-        // {this.loadSaved}
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute:"2-digit", second: "2-digit" };
         return (
             <div>
             <Header/>
@@ -48,7 +48,7 @@ class Saved extends React.Component {
                 <strong>
                   <h1>{article.title}</h1>
                   <a href={article.url}>{article.url}</a>
-                  <h3>{article.date}</h3>
+                  <h3>{new Date(article.date).toLocaleDateString("en-US", options)}</h3>
                 </strong>
                 <DeleteButton onClick={() => this.delete(article._id)} />
               </ArticleListItem>
