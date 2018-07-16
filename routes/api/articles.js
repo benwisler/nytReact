@@ -26,6 +26,6 @@ router
   // .get(articlesController.findById)
   // .post(articlesController.save)
   .delete(articlesController.delete);
-  
-router.route("*").get("client/build/index.html");
+
+// router.route("*").get("client/build/index.html");
 module.exports = router;
