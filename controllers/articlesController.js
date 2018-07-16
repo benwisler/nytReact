@@ -4,10 +4,12 @@ const db = require("./../models");
 module.exports = {
   findAll: function(req, res) {
     db.Article
-      .findAll()
-      .sort({ date: -1 })
+      .find({}, function(err, results){
+        console.log(results)
+      })
+      // .sort({ date: -1 })
       .then(dbModel => res.json(dbModel), console.log(dbModel))
-      .catch(err => res.status(422).json(err));
+      // .catch(err => res.status(422).json(err));
   },
   // create: function(req, res) {
   //   db.Article

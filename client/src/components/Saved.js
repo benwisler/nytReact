@@ -12,23 +12,26 @@ class Saved extends React.Component {
     state = {
         articles: []
       };
+      componentDidMount() {
+        this.loadSaved();
+      }
       loadSaved = () => {
         API.findAll()
           .then(res =>
             this.setState({
-              articles: res
+              articles: res.data
             }),
-            console.log(this.state)
+            // console.log(this.state)
           )
           .catch(err => console.log(err));
       };
     render () {
-        {this.loadSaved}
+        // {this.loadSaved}
         return (
             <div>
                 
             <h1>Saved Articles</h1>
-            {console.log(this.state)}
+            {/* {console.log(this.state)} */}
             {/* <ArticleList>
             {this.state.articles.map(article => {
               return (

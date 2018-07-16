@@ -11,7 +11,7 @@ export default {
   },
   // Gets the book with the given id
   findAll: function() {
-    return axios.get("/api/articles");
+    return axios.get("/api/articles/saved");
   },
   // Deletes the book with the given id
   delete: function(id) {

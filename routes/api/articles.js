@@ -14,9 +14,11 @@ const articlesController = require("./../../controllers/articlesController");
 
 // Matches withhttp://localhost:3000 "/api/books"
 router.route("/")
-  .get(articlesController.findAll)
+  // .get(articlesController.findAll)
   .post(articlesController.saveArticle)
-
+  router.route("/saved")
+  .get(articlesController.findAll)
+  // .post(articlesController.saveArticle)
 
 // Matches with "/api/books/:id"
 // router
