@@ -4,7 +4,7 @@ import { FormGroup, ControlLabel, Button, FormControl } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { ArticleListItem, ArticleList } from "./ArticleList";
 import SaveButton from "./SaveButton";
-
+import Header from "./Header";
 class Form extends React.Component {
   state = {
     articles: [],
@@ -36,7 +36,7 @@ class Form extends React.Component {
     )
       .then(res => {
         console.log(res.data.response.docs);
-        this.setState({ articles: res.data.response.docs });
+        this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) });
       })
       .catch(err => this.setState({ error: err.message }));
   };
@@ -44,10 +44,16 @@ class Form extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-
+   changeText = () => // no ';' here
+  {
+      if (this.value=="Save") this.value = "Saved";
+      else this.value = "Saved";
+  }
+  
   render() {
     return (
       <div>
+        <Header/>
         <form>
           <FormGroup
             controlId="formBasicText"
@@ -112,7 +118,11 @@ class Form extends React.Component {
                       <h2> {article.web_url}</h2>
                       <h3>{article.pub_date}</h3>
                     </strong>
-                    <SaveButton onClick={() => this.saveArticle(article)} />
+                    <SaveButton onClick={() => 
+                      {
+                      this.changeText();
+                      this.saveArticle(article)}} />
+                    
                   </ArticleListItem>
                 );
               })}

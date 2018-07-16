@@ -11,7 +11,9 @@ class Header extends React.Component {
                 Search for articles by keyword and save them for future reference.
           </p>
           <p>
-            <Button bsStyle="primary">View Saved</Button>
+            <Button bsStyle="primary" href="/saved" >View Saved</Button>
+            <Button bsStyle="primary" href="/" >Go Home</Button>
+
           </p>
         </Jumbotron>;
       </div>

@@ -21,10 +21,10 @@ router.route("/")
   // .post(articlesController.saveArticle)
 
 // Matches with "/api/books/:id"
-// router
-//   .route("/:id")
-//   .get(articlesController.findById)
-//   .post(articlesController.save)
-//   .delete(articlesController.remove);
+router
+  .route("/saved/:id")
+  // .get(articlesController.findById)
+  // .post(articlesController.save)
+  .delete(articlesController.delete);
 
 module.exports = router;
