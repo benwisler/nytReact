@@ -19,7 +19,7 @@ app.get("*", (req, res) => {
 });
 
 // Connect to the Mongo DB
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nytreact";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nytreact";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI );
