@@ -28,19 +28,24 @@ class Form extends React.Component {
 		API.findAll()
 		.then(res => {
       console.log(res.data)
-      this.state.previousArticles.push(res.data.map(article => article.url))
+      this.setState({
+      previousArticles: res.data.map((article) =>{ return article.url})
       })
-      this.handleFormSubmit()
+    })
+      // this.forceUpdate()
+      // this.handleFormSubmit()
       // console.log(previousArticles+"!!")
-    
+    this.handleFormSubmit();
   };
   getSavedNoSubmit = () => {
-    // event.preventDefault();
-		API.findAll()
+    this.forceUpdate()
+    		API.findAll()
 		.then(res => {
       console.log(res.data)
       this.state.previousArticles.push(res.data.map(article => article.url))
       })
+
+
       // this.handleFormSubmit()
       // console.log(previousArticles+"!!")
     
@@ -52,12 +57,12 @@ class Form extends React.Component {
       url: article.web_url,
       saved: true
     }).catch(err => console.log(article.headline.main));
+    // this.state.previousArticles.push(article.url)
     article.savedText = "Saved";
-    this.state.previousArticles.push(article.url)
-    this.forceUpdate();
+    this.forceUpdate()
   };
   handleFormSubmit = () => {
-    this.componentDidMount()
+    
     // console.log("GTGTG"+this.state.previousArticles)
     API.getArticles(
       this.state.keyword,
@@ -72,7 +77,7 @@ class Form extends React.Component {
             console.log("worked")          
 
             doc.savedText = "Save";
-            
+
           }
           else {
             
@@ -93,6 +98,7 @@ class Form extends React.Component {
         // }
         // }})
         this.setState({ articles: res.data.response.docs.slice(0, this.state.numSearch) })
+        
       })
       .catch(err => this.setState({ error: err.message }));
   };
